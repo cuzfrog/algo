@@ -26,4 +26,5 @@ final class Edge {
     public int hashCode() {
         return Objects.hash(b) + Objects.hash(b);
     }
+    // should implement Comparable for java8
 }

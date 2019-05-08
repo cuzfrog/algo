@@ -3,6 +3,8 @@ package algo.graph;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 final class Graph {
     private final Set<Integer>[] vertices;
@@ -15,8 +17,7 @@ final class Graph {
             vertices[i] = new HashSet<>();
         }
         edges.forEach(e -> this.addEdge(e.a, e.b));
-        cyclicMarks = new boolean[vertexCount];
-        markCycles();
+        cyclicMarks = markCycles();
     }
 
     private void addEdge(int v1, int v2) {
@@ -25,7 +26,7 @@ final class Graph {
         vertices[v2].add(v1);
     }
 
-    private void markCycles() {
+    private boolean[] markCycles() {
         throw new AssertionError("Not implemented");
     }
 
@@ -41,4 +42,20 @@ final class Graph {
         return cyclicMarks[vertex];
     }
 
+    /** Return Integer.MAX_VALUE if there's no path linking src and dest. */
+    int shortestDistance(int src, int dest) {
+        int[] marked = new int[this.vertexCount()];
+        Set<Integer> adjacent = new HashSet<>();
+        adjacent.add(src);
+        AtomicInteger step = new AtomicInteger(0);
+        while (marked[dest] == 0 && !adjacent.isEmpty()) { //BFS
+            step.incrementAndGet();
+            adjacent = adjacent.stream().flatMap(v ->
+                    this.adjacent(v).stream()
+                            .filter(i -> marked[i] == 0)
+                            .peek(i -> marked[i] = step.get())
+            ).collect(Collectors.toSet());
+        }
+        return adjacent.isEmpty() ? Integer.MAX_VALUE : marked[dest];
+    }
 }
