@@ -58,13 +58,18 @@ final class LongListStringCounter {
                     Node child = children[i];
                     if (child != null) {
                         if (p < 0) minHeap[++p] = child;
-                        else if (child.cnt > minHeap[0].cnt) {
+                        else {
                             if (p >= minHeap.length - 1) { // if full, remove min
-                                swap(minHeap, 0, p--);
-                                heapSwimDown(minHeap, p);
+                                if (child.cnt > minHeap[0].cnt) {
+                                    swap(minHeap, 0, p--);
+                                    heapSwimDown(minHeap, p);
+                                    minHeap[++p] = child;
+                                    heapSwimUp(minHeap, p);
+                                }
+                            } else {
+                                minHeap[++p] = child;
+                                heapSwimUp(minHeap, p);
                             }
-                            minHeap[++p] = child;
-                            heapSwimUp(minHeap, p);
                         }
                         child.findTopRecursiveHelper(minHeap, p);
                     }
@@ -95,7 +100,7 @@ final class LongListStringCounter {
         String toWord() {
             Node n = this;
             Deque<Node> stack = new LinkedList<>();
-            while (n != null) {
+            while (n.parent != null) {
                 stack.push(n);
                 n = n.parent;
             }
