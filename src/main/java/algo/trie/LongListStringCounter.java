@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * A Trie to count long String list.
+ * A Trie to count long String list. This impl is probably not much more spatially efficient than a map.
  */
 final class LongListStringCounter {
     /**
