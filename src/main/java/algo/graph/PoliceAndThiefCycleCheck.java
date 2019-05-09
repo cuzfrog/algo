@@ -1,10 +1,10 @@
 package algo.graph;
 
-final class PoliceAndThief {
-    private final Graph graph;
+final class PoliceAndThiefCycleCheck {
+    private final UGraphCycle4 graph;
     private final int police, thief;
 
-    PoliceAndThief(final Graph graph, final int police, final int thief) {
+    PoliceAndThiefCycleCheck(final UGraphCycle4 graph, final int police, final int thief) {
         this.graph = graph;
         this.police = police;
         this.thief = thief;

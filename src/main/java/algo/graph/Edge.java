@@ -10,7 +10,7 @@ final class Edge {
         this.b = b;
     }
 
-    Edge of(int a, int b) {
+    static Edge of(int a, int b) {
         return new Edge(a, b);
     }
 
