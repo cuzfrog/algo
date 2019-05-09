@@ -17,7 +17,7 @@ final class Graph {
             vertices[i] = new HashSet<>();
         }
         edges.forEach(e -> this.addEdge(e.a, e.b));
-        cyclicMarks = markCycles();
+        cyclicMarks = markCyclesOfMoreThan3Nodes();
     }
 
     private void addEdge(int v1, int v2) {
@@ -26,7 +26,7 @@ final class Graph {
         vertices[v2].add(v1);
     }
 
-    private boolean[] markCycles() {
+    private boolean[] markCyclesOfMoreThan3Nodes() {
         throw new AssertionError("Not implemented");
     }
 
@@ -35,10 +35,11 @@ final class Graph {
     }
 
     Set<Integer> adjacent(int vertex) {
-        return Collections.unmodifiableSet(vertices[vertex]);
+        return new HashSet<>(vertices[vertex]);
     }
 
-    boolean isInCycle(int vertex) {
+    /** Cycles that contain more than 3 nodes. */
+    boolean isInCycleOfMoreThan3Nodes(int vertex) {
         return cyclicMarks[vertex];
     }
 

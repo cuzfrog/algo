@@ -11,10 +11,8 @@ final class PoliceAndThief {
     }
 
     boolean catchable() {
-        if (graph.isInCycle(thief)) return false; // if thief is already in a cycle.
-
         for (int i = 0, l = graph.vertexCount(); i < l; i++) {
-            if (graph.isInCycle(i)) {
+            if (i != thief && graph.isInCycleOfMoreThan3Nodes(i)) {
                 if (graph.shortestDistance(i, thief) < graph.shortestDistance(i, police))
                     return false; // if thief can go to a cycle first.
             }
