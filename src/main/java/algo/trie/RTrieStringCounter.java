@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
  * A Trie to count long String list. This impl is probably not much more spatially efficient than a map.
  */
-final class LongListStringCounter {
+final class RTrieStringCounter {
     /**
      * @param src   coming String list
      * @param n     top n count
