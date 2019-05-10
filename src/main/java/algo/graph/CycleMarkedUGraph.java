@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-final class UGraphCycle4 {
+final class CycleMarkedUGraph implements Graph {
     private final Set<Integer>[] adjArr;
     private final int[] cyclicMarks;
 
     @SuppressWarnings("unchecked")
-    UGraphCycle4(final int vertexCount, Set<Edge> edges) {
+    CycleMarkedUGraph(final int vertexCount, Set<Edge> edges) {
         if (vertexCount <= 0 || edges == null) throw new IllegalArgumentException();
         adjArr = (Set<Integer>[]) new Set[vertexCount];
         for (int i = 0; i < vertexCount; i++) {
@@ -61,21 +61,23 @@ final class UGraphCycle4 {
         }
     }
 
-    int vertexCount() {
+    @Override
+    public int vertexCount() {
         return adjArr.length;
     }
 
-    Set<Integer> adjacent(int vertex) {
+    @Override
+    public Set<Integer> adjacent(int vertex) {
         return new HashSet<>(adjArr[vertex]);
     }
 
-    /** Cycles that contain more than 3 nodes. */
-    boolean isInCycleOfMoreThan3Nodes(int vertex) {
-        return cyclicMarks[vertex] > 3;
+    @Override
+    public boolean isInCycle(int vertex, int cycleLength) {
+        return cyclicMarks[vertex] > cycleLength;
     }
 
-    /** Return Integer.MAX_VALUE if there's no path linking src and dest. */
-    int shortestDistance(int src, int dest) {
+    @Override
+    public int shortestDistance(int src, int dest) {
         int[] marked = new int[this.vertexCount()];
         Set<Integer> adjacent = new HashSet<>();
         adjacent.add(src);

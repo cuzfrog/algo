@@ -11,7 +11,7 @@ final class TestGraphSample {
               \ /
               11
     */
-    static final UGraphCycle4 graph;
+    static final CycleMarkedUGraph graph;
     static {
         Edge[] edges = new Edge[]{
                 Edge.of(1, 2),
@@ -37,6 +37,6 @@ final class TestGraphSample {
                 Edge.of(16, 15),
                 Edge.of(15, 17),
         };
-        graph = new UGraphCycle4(18, Arrays.stream(edges).collect(Collectors.toSet()));
+        graph = new CycleMarkedUGraph(18, Arrays.stream(edges).collect(Collectors.toSet()));
     }
 }

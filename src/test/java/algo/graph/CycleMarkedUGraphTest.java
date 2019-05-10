@@ -6,16 +6,16 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class UGraphCycle4Test {
+public final class CycleMarkedUGraphTest {
 
-    private static final UGraphCycle4 graph = TestGraphSample.graph;
+    private static final CycleMarkedUGraph graph = TestGraphSample.graph;
 
     @Test
     public void isInCycleOfMoreThan3Nodes() {
         int[] expectedInCycle = {2, 3, 8, 9, 4, 5, 10, 11, 12};
-        assertThat(Arrays.stream(expectedInCycle).mapToObj(graph::isInCycleOfMoreThan3Nodes)).allMatch(r -> r);
+        assertThat(Arrays.stream(expectedInCycle).mapToObj(i-> graph.isInCycle(i, 3))).allMatch(r -> r);
         int[] expectedNotInCycle = {1, 6, 7, 13, 0, 14, 15, 16, 17};
-        assertThat(Arrays.stream(expectedNotInCycle).mapToObj(graph::isInCycleOfMoreThan3Nodes)).allMatch(r -> !r);
+        assertThat(Arrays.stream(expectedNotInCycle).mapToObj(i-> graph.isInCycle(i, 3))).allMatch(r -> !r);
     }
 
     @Test

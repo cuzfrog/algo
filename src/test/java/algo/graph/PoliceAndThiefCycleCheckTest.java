@@ -12,7 +12,7 @@ public class PoliceAndThiefCycleCheckTest {
               \ /
               11
     */
-    private static final UGraphCycle4 graph = TestGraphSample.graph;
+    private static final CycleMarkedUGraph graph = TestGraphSample.graph;
 
     @Test
     public void catchableCheck() {
