@@ -7,13 +7,16 @@ import java.util.stream.Collectors;
 final class CycleMarkedUGraph implements Graph {
     private final Set<Integer>[] adjArr;
     private final int[] cyclicMarks;
+    private final int[][] distances;
 
     @SuppressWarnings("unchecked")
     CycleMarkedUGraph(final int vertexCount, Set<Edge> edges) {
         if (vertexCount <= 0 || edges == null) throw new IllegalArgumentException();
         adjArr = (Set<Integer>[]) new Set[vertexCount];
+        distances = new int[vertexCount][vertexCount];
         for (int i = 0; i < vertexCount; i++) {
             adjArr[i] = new HashSet<>();
+            Arrays.fill(distances[i], -1);
         }
         edges.forEach(e -> addEdge(e.a, e.b));
         cyclicMarks = new int[vertexCount];
@@ -57,7 +60,7 @@ final class CycleMarkedUGraph implements Graph {
     private void downgradeCycleLength() {
         for (int i = 0; i < adjArr.length; i++) {
             int adjMinCycle = adjArr[i].stream().mapToInt(v -> cyclicMarks[v]).filter(c -> c > 0).min().orElse(Integer.MAX_VALUE);
-            if(adjMinCycle < cyclicMarks[i]) cyclicMarks[i] = adjMinCycle;
+            if (adjMinCycle < cyclicMarks[i]) cyclicMarks[i] = adjMinCycle;
         }
     }
 
@@ -78,6 +81,12 @@ final class CycleMarkedUGraph implements Graph {
 
     @Override
     public int shortestDistance(int src, int dest) {
+        if (src < 0 || src >= adjArr.length || dest < 0 || dest >= adjArr.length) throw new IllegalArgumentException();
+        if (src == dest) return 0;
+
+        int dis;
+        if ((dis = distances[src][dest]) >= 0) return dis; //cached
+
         int[] marked = new int[this.vertexCount()];
         Set<Integer> adjacent = new HashSet<>();
         adjacent.add(src);
@@ -90,7 +99,10 @@ final class CycleMarkedUGraph implements Graph {
                             .peek(i -> marked[i] = step.get())
             ).collect(Collectors.toSet());
         }
-        return adjacent.isEmpty() ? Integer.MAX_VALUE : marked[dest];
+        dis = adjacent.isEmpty() ? Integer.MAX_VALUE : marked[dest];
+        distances[src][dest] = dis;
+        distances[dest][src] = dis;
+        return dis;
     }
 
     private static final class Node {

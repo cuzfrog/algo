@@ -8,7 +8,7 @@ interface Graph {
 
     Set<Integer> adjacent(int vertex);
 
-    /** Check if a vertex is in a cycle of a given minimum length. */
+    /** Check if a pv is in a cycle of a given minimum length. */
     boolean isInCycle(int vertex, int cycleLength);
 
     /** Return Integer.MAX_VALUE if there's no path linking src and dest. */
