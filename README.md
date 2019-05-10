@@ -28,3 +28,13 @@ When T<w, a Trie could possible win a Map.
 R-way Trie [implementation](src/main/java/algo/trie/RTrieStringCounter.java)
 
 Ts Trie [implementation](src/main/java/algo/trie/TstStringCounter.java)
+
+**Memory measure:**
+Digest 500000 random alphabet String of 3 width. 
+See [test](src/test/java/algo/trie/LongListStringCounterTest.java)
+
+* 256-way Trie: 700+MB
+* Ts Trie: todo
+* HashMap: 40+MB
+
+(Tested serval times on HotSpot 1.8.0_152 64bit)
