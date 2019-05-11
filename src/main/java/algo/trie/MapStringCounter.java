@@ -1,15 +1,19 @@
 package algo.trie;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-final class HashMapStringCounter implements StringCounter {
+final class MapStringCounter implements StringCounter {
 
-    private final Map<String, Integer> map = new HashMap<>();
+    private final Map<String, Integer> map;
+
+    MapStringCounter(final Supplier<Map<String, Integer>> mapFactory) {
+        this.map = mapFactory.get();
+    }
 
     @Override
     public List<String> top(final Stream<String> src, final int n, final int limit) {

@@ -4,6 +4,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,8 +46,28 @@ public class LongListStringCounterTest {
 
     @Test
     public void hashMapMemMeasure() {
-        new HashMapStringCounter().top(infiniteSrc, 10, 500000).forEach(System.out::println);
-        System.out.println("HashMap: " + memUsage() + "MB");
+        new MapStringCounter(HashMap::new).top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        System.out.println("HashMap_0.75: " + memUsage() + "MB");
+    }
+
+    @Test
+    public void hashMapOneLoadFactorMemMeasure() {
+        new MapStringCounter(() -> new HashMap<>(100, 1.0f))
+                .top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        System.out.println("HashMap_1.0: " + memUsage() + "MB");
+    }
+
+    @Test
+    public void hashMap25FactorMemMeasure() {
+        new MapStringCounter(() -> new HashMap<>(100, 0.25f))
+                .top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        System.out.println("HashMap_0.25: " + memUsage() + "MB");
+    }
+
+    @Test
+    public void treeMapMemMeasure() {
+        new MapStringCounter(TreeMap::new).top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        System.out.println("TreeMap: " + memUsage() + "MB");
     }
 
     private static long memUsage() {

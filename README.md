@@ -34,7 +34,13 @@ Digest 500000 random alphabet String of 3 width.
 See [test](src/test/java/algo/trie/LongListStringCounterTest.java)
 
 * 256-way Trie: 700+MB
-* Ts Trie: 45+MB
-* HashMap: 40+MB
+* Ts Trie: 49MB
+* HashMap: 45-59MB
+* TreeMap: 44-51MB
 
 (Tested serval times on HotSpot 1.8.0_152 64bit)
+
+Memory usage of TsTrie is pretty much stable. 
+TreeMap sizes should be affected by random key count.
+Not observed: a HashMap's size relates to its load factor. 
+Its size could already be stable.
