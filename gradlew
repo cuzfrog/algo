@@ -30,7 +30,7 @@ APP_BASE_NAME=`basename "$0"`
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
-# Use the maximum available, or set MAX_FD != -1 to use that value.
+# Use the maximum available, or set MAX_FD != -1 to use that c.
 MAX_FD="maximum"
 
 warn () {
@@ -130,8 +130,8 @@ if $cygwin ; then
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
     i=0
     for arg in "$@" ; do
-        CHECK=`echo "$arg"|egrep -value "$OURCYGPATTERN" -`
-        CHECK2=`echo "$arg"|egrep -value "^-"`                                 ### Determine if an option
+        CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+        CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
 
         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
