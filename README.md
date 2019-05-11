@@ -37,16 +37,16 @@ Max distinct key count: Permutation(26,W)
 * W=5: 1,000,000(7,893,600)
 See [test](src/test/java/algo/trie/LongListStringCounterTest.java)
 
-Each for average result(MB) of 5 trials:
+A typical result(MB):
 
 Implementation | Width of 3 | Width of 4 | Width of 5
 ------------ | ------------- | ------------ | ----------
-256-way Trie | 771| NA | NA
-HashMap_0.25 | 95 | 162 | 174
-HashMap_0.75 | 84 | 142 | 170
-HashMap_1.00 | 84 | 146 | 162
-TreeMap      | 84 | 142 | 162
-Ts Trie      | 79 | 122 | 182
+256-way Trie | 716| NA | NA
+HashMap_0.25 | 26 | 83 | 89
+HashMap_0.75 | 13 | 71 | 71
+HashMap_1.00 | 13 | 59 | 65
+TreeMap      | 13 | 59 | 65
+Ts Trie      | 7 | 45 | 85
 
 (Tested serval times on HotSpot 1.8.0_152 64bit)
 
