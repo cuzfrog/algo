@@ -4,8 +4,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,8 +44,7 @@ public class LongListStringCounterTest {
 
     @Test
     public void hashMapMemMeasure() {
-        Map<String, Integer> counter = new HashMap<>();
-        infiniteSrc.limit(500000).forEach(str -> counter.compute(str, (k, v) -> v == null ? 1 : v + 1));
+        new HashMapStringCounter().top(infiniteSrc, 10, 500000).forEach(System.out::println);
         System.out.println("HashMap: " + memUsage() + "MB");
     }
 

@@ -16,7 +16,7 @@ final class TstStringCounter implements StringCounter {
         recursivelyFindTop(minHeap, root);
         return minHeap.getAll().stream()
                 .sorted(Comparator.reverseOrder())
-                .map(w -> w.toWord())
+                .map(Node::toWord)
                 .collect(Collectors.toList());
     }
 

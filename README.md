@@ -34,7 +34,7 @@ Digest 500000 random alphabet String of 3 width.
 See [test](src/test/java/algo/trie/LongListStringCounterTest.java)
 
 * 256-way Trie: 700+MB
-* Ts Trie: todo
+* Ts Trie: 45+MB
 * HashMap: 40+MB
 
 (Tested serval times on HotSpot 1.8.0_152 64bit)
