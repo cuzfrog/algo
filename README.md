@@ -1,18 +1,16 @@
 ## 1. Police & Thief in a graph
 
-**Cycle check**
+**Cycle check** [Implementation](src/main/java/algo/graph/PoliceAndThiefCycleCheck.java)
 
 Based on the thought that if the thief can escape to a cycle, then, the chasing becomes infinite.
 * Only cycles that contain more than 3 nodes can be available for the thief.
 * Even in a 4 nodes cycle, if all thief's next move is within the police's range, the thief can't escape.
 
-[Implementation](src/main/java/algo/graph/PoliceAndThiefCycleCheck.java)
 
-**Backtracking**
+**Backtracking** [Implementation](src/main/java/algo/graph/PoliceAndThiefBacktrack.java)
 
 Assumption: the police is always heading to the thief by the shortest path.
 
-[Implementation](src/main/java/algo/graph/PoliceAndThiefBacktrack.java)
 
 ## 2. Count repetition times of a long list of Strings
 
@@ -35,6 +33,7 @@ Max distinct key count: Permutation(26,W)
 * W=3:    15,600
 * W=4:   358,800
 * W=5: 1,000,000(7,893,600)
+
 See [test](src/test/java/algo/trie/LongListStringCounterTest.java)
 
 A typical result(MB):
