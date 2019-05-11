@@ -24,18 +24,24 @@ public class LongListStringCounterTest {
 
     @Test
     public void rWayTrie() {
-        assertThat(RTrieStringCounter.top(src, 3, 100)).containsExactly("D", "A", "B");
+        assertThat(new RTrieStringCounter().top(src, 3, 100)).containsExactly("D", "A", "B");
     }
 
     @Test
     public void tsTrie() {
-        //assertThat(TstStringCounter.top(src, 3, 100)).containsExactly("D", "A", "B");
+        assertThat(new TstStringCounter().top(src, 3, 100)).containsExactly("D", "A", "B");
     }
 
     @Test
     public void rWayTrieMemMeasure() {
-        RTrieStringCounter.top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        new RTrieStringCounter().top(infiniteSrc, 10, 500000).forEach(System.out::println);
         System.out.println("256RTrie: " + memUsage() + "MB");
+    }
+
+    @Test
+    public void tsTrieMemMeasure() {
+        new TstStringCounter().top(infiniteSrc, 10, 500000).forEach(System.out::println);
+        System.out.println("TsTrie: " + memUsage() + "MB");
     }
 
     @Test
